@@ -1,0 +1,43 @@
+/* Our Journey — 3D book, JAA Tech logo palette (magenta #880058, green #50A050) */
+.jb-wrap{--jb-green:#93dc9b;--jb-mag:#c42a92;padding:0!important;background:#12000d;scroll-margin-top:0!important}
+.jb-stage{--jb-nav:100px;--jb-copy:clamp(250px,36vh,320px);position:relative;width:100%;height:calc(100vh - var(--jb-nav));height:calc(100svh - var(--jb-nav));overflow:hidden;
+  background:radial-gradient(ellipse 70% 60% at 50% 42%,#4d0a37 0%,#2a001e 50%,#12000d 100%);color:#fff}
+.jb-stage:after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 45%,transparent 58%,rgba(0,0,0,.5) 100%)}
+.jb-canvas{position:absolute;left:0;right:0;top:34px;bottom:var(--jb-copy)}
+.jb-canvas canvas{display:block}
+.jb-eyebrow{position:absolute;z-index:3;left:clamp(20px,4vw,56px);top:clamp(18px,3vh,32px);display:flex;align-items:center;gap:12px;
+  font:800 .78rem/1 'DM Sans',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--jb-green)}
+.jb-eyebrow i{display:block;width:44px;height:2px;background:var(--jb-green);opacity:.8}
+
+/* chapter copy */
+.jb-overlay{position:absolute;z-index:3;left:0;right:0;bottom:0;height:var(--jb-copy);pointer-events:none;text-align:center;
+  background:linear-gradient(180deg,rgba(18,0,13,0),rgba(18,0,13,.7) 30%,rgba(18,0,13,.9))}
+.jb-copy{position:absolute;left:50%;top:clamp(14px,2.5vh,28px);width:min(820px,calc(100% - 40px));transform:translateX(-50%);opacity:0;will-change:opacity,transform}
+.jb-num{display:inline-flex;align-items:center;gap:10px;font:700 .78rem/1 'DM Sans',sans-serif;letter-spacing:.24em;color:var(--jb-green)}
+.jb-num i{width:28px;height:2px;background:var(--jb-green);opacity:.7}
+.jb-copy h3{margin:8px 0 4px;font:600 clamp(1.6rem,3vw,2.35rem)/1.08 'Playfair Display',serif;letter-spacing:.02em;color:#fff}
+.jb-sub{margin:0 0 8px;font:700 clamp(.8rem,1.2vw,.95rem)/1.4 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--jb-green)}
+.jb-text{margin:0 auto;max-width:760px;font:400 clamp(.92rem,1.25vw,1.05rem)/1.55 'DM Sans',sans-serif;color:#f7ecf3;text-shadow:0 1px 10px rgba(18,0,13,.9)}
+
+.jb-hint{position:absolute;z-index:3;left:50%;bottom:clamp(26px,6vh,56px);transform:translateX(-50%);display:grid;justify-items:center;gap:8px;
+  font:700 .76rem/1 'DM Sans',sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--jb-green);pointer-events:none;will-change:opacity;white-space:nowrap}
+.jb-hint span{display:block;animation:jbBob 1.8s ease-in-out infinite;font-size:1.1rem}
+@keyframes jbBob{50%{transform:translateY(7px)}}
+.jb-rail{position:absolute;z-index:3;right:clamp(16px,3vw,44px);top:50%;transform:translateY(-50%);display:grid;gap:14px;pointer-events:none}
+.jb-rail b{display:block;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);transition:all .35s}
+.jb-rail b.on{background:var(--jb-green);box-shadow:0 0 0 4px rgba(147,220,155,.2);transform:scale(1.25)}
+
+/* no-WebGL / reduced-motion fallback */
+.jb-fallback{padding:110px 24px 90px;display:grid;gap:18px;max-width:760px;margin:auto}
+.jb-fb-item{padding:24px 26px;border-radius:16px;background:#420a31;border:1px solid rgba(255,255,255,.14);border-top:4px solid var(--jb-green)}
+.jb-fb-item span{font:600 1.6rem 'Playfair Display',serif;color:var(--jb-green)}
+.jb-fb-item h3{margin:6px 0 4px;font:600 1.6rem/1.15 'Playfair Display',serif;color:#fff}
+.jb-fb-item b{display:block;margin-bottom:10px;font:700 .8rem 'DM Sans',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--jb-green)}
+.jb-fb-item p{margin:0;font:400 1rem/1.65 'DM Sans',sans-serif;color:#f7ecf3}
+
+@media(max-width:700px){
+  .jb-rail{display:none}
+  .jb-stage{--jb-copy:clamp(280px,42vh,340px)}
+  .jb-copy h3{font-size:1.55rem}
+}
