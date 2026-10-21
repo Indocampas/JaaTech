@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { FaWhatsapp, FaTimes, FaPaperclip } from 'react-icons/fa'
-import { formatWhatsAppMessage, openWhatsApp } from '../lib/whatsapp.js'
+import { FaEnvelope, FaTimes, FaPaperclip } from 'react-icons/fa'
+import { formatMailMessage, openMail } from '../lib/mail.js'
 import '../styles/forms.css'
 
 const MAX_MB = 5
@@ -58,7 +58,7 @@ export default function ApplyModal({ role, roles, onClose }) {
       document.getElementById('apply-' + Object.keys(e)[0])?.focus()
       return
     }
-    const msg = formatWhatsAppMessage('New Job Application', [
+    const msg = formatMailMessage('New Job Application', [
       ['Job Role', f.role],
       ['Full Name', f.name],
       ['Email', f.email],
@@ -67,10 +67,10 @@ export default function ApplyModal({ role, roles, onClose }) {
       ['Experience', f.level === 'Fresher' ? 'Fresher' : `${f.years} year(s)`],
       ['Skills', f.skills],
       ['Message', f.message],
-      ['Resume', file ? `${file.name} (attached in this chat)` : 'Not attached'],
+      ['Resume', file ? `${file.name} (attached to this email)` : 'Not attached'],
     ])
-    openWhatsApp(msg)
-    setSent(msg)
+    openMail(`Job Application - ${f.role} - ${f.name}`, msg)
+    setSent({ msg, subject: `Job Application - ${f.role} - ${f.name}` })
   }
 
   const canShareFile = file && typeof navigator !== 'undefined' && navigator.canShare?.({ files: [file] })
@@ -83,14 +83,14 @@ export default function ApplyModal({ role, roles, onClose }) {
 
         {sent ? (
           <div className="apply-done">
-            <span className="apply-done-ic"><FaWhatsapp /></span>
+            <span className="apply-done-ic"><FaEnvelope /></span>
             <h3 id="apply-title">Almost done!</h3>
-            <p>WhatsApp has opened with your application for <b>{f.role}</b>. Press <b>Send</b> there to deliver it to JAA TECH.</p>
+            <p>Your email app has opened with your application for <b>{f.role}</b>. Press <b>Send</b> there to deliver it to JAA TECH.</p>
             {file && (
-              <p className="apply-note"><FaPaperclip /> Then attach your resume <b>{file.name}</b> in the same chat (WhatsApp does not allow websites to attach files automatically).</p>
+              <p className="apply-note"><FaPaperclip /> Then attach your resume <b>{file.name}</b> to the same email (websites cannot attach files to an email automatically).</p>
             )}
             <div className="apply-actions">
-              <button type="button" className="contact-submit" onClick={() => openWhatsApp(sent)}><span>Open WhatsApp again</span><span className="contact-arrow">→</span></button>
+              <button type="button" className="contact-submit" onClick={() => openMail(sent.subject, sent.msg)}><span>Open email app again</span><span className="contact-arrow">→</span></button>
               {canShareFile && <button type="button" className="apply-ghost" onClick={shareResume}>Share resume file</button>}
               <button type="button" className="apply-ghost" onClick={onClose}>Close</button>
             </div>
@@ -100,7 +100,7 @@ export default function ApplyModal({ role, roles, onClose }) {
             <div className="contact-card-header">
               <span className="contact-eyebrow">Apply now</span>
               <h3 id="apply-title">Apply for this role</h3>
-              <p>Fill in your details. They will be sent to our HR team on WhatsApp.</p>
+              <p>Fill in your details. They will open in your email app, ready to send to our HR team.</p>
             </div>
 
             <div className="contact-form-row">
@@ -143,7 +143,7 @@ export default function ApplyModal({ role, roles, onClose }) {
               {err.resume && <small className="apply-err">{err.resume}</small>}
             </div>
 
-            <button type="submit" className="contact-submit apply-wa"><span><FaWhatsapp /> Submit via WhatsApp</span><span className="contact-arrow">→</span></button>
+            <button type="submit" className="contact-submit apply-mail"><span><FaEnvelope /> Submit via Email</span><span className="contact-arrow">→</span></button>
           </form>
         )}
       </div>

@@ -2,14 +2,11 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import './Navbar.css';
 
-//import logo from '../assets/jaa-logo-tech.png';
-
 const LINKS = [
   'Home',
   'About',
   'Services',
   'Technology',
-  'Accessibility',
   'Careers',
   'Contact',
 ];
@@ -19,42 +16,41 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('Home');
 
+  // Scroll detection and active section highlighting
   useEffect(() => {
     const handleScroll = () => {
       setOn(window.scrollY > 40);
 
-      const sections = LINKS.map((link) =>
-        document.getElementById(link.toLowerCase())
-      ).filter(Boolean);
+      const clear =
+        window.innerWidth <= 520
+          ? 90
+          : window.innerWidth <= 950
+            ? 105
+            : 190;
 
       let current = 'Home';
 
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
+      LINKS.forEach((link) => {
+        const section = document.getElementById(
+          link.toLowerCase()
+        );
 
-        // Anchor lands the section just below the fixed nav (see
-        // globals.css --nav-clear / section scroll-margin-top), so use the
-        // same clearance here to keep the highlighted link in sync.
-        const clear = window.innerWidth <= 520 ? 100 : window.innerWidth <= 950 ? 120 : 190;
-
-        if (rect.top <= clear) {
-          current = section.id;
+        if (section && section.getBoundingClientRect().top <= clear) {
+          current = link;
         }
       });
 
-      setActive(
-        current.charAt(0).toUpperCase() + current.slice(1)
-      );
+      setActive(current);
     };
 
     handleScroll();
 
     window.addEventListener('scroll', handleScroll, {
-      passive: true
+      passive: true,
     });
 
     window.addEventListener('resize', handleScroll, {
-      passive: true
+      passive: true,
     });
 
     return () => {
@@ -63,6 +59,37 @@ export default function Navbar() {
     };
   }, []);
 
+  // Close with Escape, lock background scrolling,
+  // and close the menu when switching to desktop width.
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 950) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [open]);
+
   const handleNavClick = (link) => {
     setActive(link);
     setOpen(false);
@@ -70,21 +97,32 @@ export default function Navbar() {
 
   return (
     <header className={`nav ${on || open ? 'on' : ''}`}>
-
       {/* LOGO */}
-      <a
-        href="#home"
-        className="nav-logo"
-        aria-label="JAA TECH home"
-        onClick={() => handleNavClick('Home')}
-      >
-        <img
-          src="/assets/jaa-tech-logo.png"
-          alt="JAA TECH"
-        />
-      </a>
+      
+<a
+  href="#home"
+  className="nav-logo"
+  aria-label="JAA TECH home"
+  onClick={() => handleNavClick('Home')}
+>
 
-      {/* DESKTOP NAV */}
+<video
+  className="nav-logo-video"
+  src="/assets/jaa-tech-logo.mp4"
+  autoPlay
+  muted
+  loop
+  playsInline
+  disablePictureInPicture
+  controlsList="nodownload nofullscreen noremoteplayback"
+  preload="auto"
+  aria-label="JAA TECH logo animation"
+/>
+
+</a>
+
+
+      {/* DESKTOP NAVIGATION */}
       <ul className="nav-links">
         {LINKS.map((link) => (
           <li key={link}>
@@ -107,51 +145,68 @@ export default function Navbar() {
           onClick={() => handleNavClick('Contact')}
         >
           <span>Start a Project</span>
-          <span className="cta-arrow">→</span>
+          <span className="cta-arrow" aria-hidden="true">
+            →
+          </span>
         </a>
       </div>
 
-      {/* BURGER */}
-      <button
-        className={`burger ${open ? 'open' : ''}`}
-        aria-label="Menu"
-        aria-expanded={open}
-        onClick={() => setOpen(!open)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+   
+{/* MOBILE MENU TOGGLE */}
+<button
+  type="button"
+  className={`burger ${open ? 'open' : ''}`}
+  aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+  aria-expanded={open}
+  aria-controls="mobile-navigation"
+  onClick={() => setOpen((previous) => !previous)}
+>
+  <svg
+    className="burger-icon"
+    viewBox="0 0 24 24"
+    width="26"
+    height="26"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    {open ? (
+      <>
+        <path d="M6 6L18 18" />
+        <path d="M18 6L6 18" />
+      </>
+    ) : (
+      <>
+        <path d="M4 7H20" />
+        <path d="M4 12H20" />
+        <path d="M4 17H20" />
+      </>
+    )}
+  </svg>
+</button>
 
-      {/* MOBILE MENU */}
+
+      {/* MOBILE NAVIGATION */}
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-navigation"
             className="menu"
-            initial={{
-              opacity: 0,
-              y: -20
-            }}
-            animate={{
-              opacity: 1,
-              y: 0
-            }}
-            exit={{
-              opacity: 0,
-              y: -20
-            }}
-            transition={{
-              duration: 0.25,
-              ease: 'easeOut'
-            }}
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
           >
             {LINKS.map((link) => (
               <a
                 key={link}
-                className={
-                  active === link ? 'mobile-active' : ''
-                }
+                className={active === link ? 'mobile-active' : ''}
                 href={`#${link.toLowerCase()}`}
+                aria-current={active === link ? 'page' : undefined}
                 onClick={() => handleNavClick(link)}
               >
                 {link}
@@ -165,13 +220,14 @@ export default function Navbar() {
                 onClick={() => handleNavClick('Contact')}
               >
                 <span>Start a Project</span>
-                <span className="cta-arrow">→</span>
+                <span className="cta-arrow" aria-hidden="true">
+                  →
+                </span>
               </a>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
-
     </header>
   );
 }

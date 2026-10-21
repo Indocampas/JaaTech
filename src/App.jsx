@@ -13,6 +13,7 @@ import {
   Contact,
   Footer,
 } from './sections/Sections.jsx'
+import { Team } from './sections/Team.jsx'
 
 export default function App() {
   const { scrollYProgress } = useScroll()
@@ -23,12 +24,14 @@ export default function App() {
       <Navbar />
       <Hero />
       <About />
+      <Journey />
       <Services />
       <BookShowcase />
       <Technology />
       <Accessibility />
       <CloudDistribution />
-      <Journey />
+     
+      <Team />
       <Careers />
       <Contact />
       <Footer />

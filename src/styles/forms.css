@@ -12,8 +12,6 @@
 .contact-social{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
 .contact-social a{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(155,43,93,.45);color:#7e2448;background:rgba(255,255,255,.4);font-size:19px;text-decoration:none;transition:transform .25s,background .25s,color .25s}
 .contact-social a:hover,.contact-social a:focus-visible{background:#7e2448;color:#fff;transform:translateY(-3px)}
-.contact-wa{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:13px 22px;border-radius:999px;background:#25d366;color:#fff!important;font-weight:700;font-size:14.5px;text-decoration:none;box-shadow:0 14px 28px -16px rgba(37,211,102,.9)}
-.contact-wa:hover{filter:brightness(.95)}
 .contact-submit svg{width:1.1em;height:1.1em;vertical-align:-.15em;margin-right:8px}
 .contact-submit{font-family:inherit}
 
@@ -40,12 +38,10 @@
 .apply-file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .apply-file:hover,.apply-file.has{border-color:#7e2448;background:#fff}
 .apply-file-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.apply-wa{background:#1fa855}
-.apply-wa:hover{background:#178f47}
 .apply-done{text-align:center;display:grid;gap:14px;justify-items:center;padding:14px 0}
 .apply-done h3{margin:0;font:600 30px 'Playfair Display',serif;color:#5f193b}
 .apply-done p{margin:0;color:#6e5c61;line-height:1.65;max-width:460px}
-.apply-done-ic{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;font-size:34px}
+.apply-done-ic{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:var(--accent,#2563eb);color:#fff;font-size:34px}
 .apply-note{padding:12px 14px;border-radius:12px;background:rgba(139,31,59,.07);border:1px solid rgba(139,31,59,.2);font-size:14px;overflow-wrap:anywhere}
 .apply-note svg{margin-right:6px;vertical-align:-2px}
 .apply-actions{display:grid;gap:10px;width:100%;max-width:380px;margin-top:6px}

@@ -20,14 +20,14 @@ import {
   FaShareAlt,
   FaInstagram,
   FaLinkedinIn,
-  FaWhatsapp,
   FaEnvelope,
+  FaWhatsapp,
   FaPhoneAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import ApplyModal from '../components/ApplyModal.jsx'
 import { SITE } from '../lib/site.js'
-import { formatWhatsAppMessage, openWhatsApp } from '../lib/whatsapp.js'
+import { formatMailMessage, openMail } from '../lib/mail.js'
 import '../styles/forms.css'
 
 
@@ -141,13 +141,14 @@ const BookImage = ({ book, className = '' }) => (
 
 /* 01 HERO */
 
+
 export function Hero() {
   return (
     <section id="home" className="hero hero-sample">
 
-      {/* Background Video */}
+      {/* Background Video - Desktop & Mobile */}
       <video
-        className="hero-bg-video"
+        className="hero-bg-video hero-bg-desktop"
         autoPlay
         muted
         loop
@@ -157,12 +158,21 @@ export function Hero() {
         <source src={A + "hero-bg.mp4"} type="video/mp4" />
       </video>
 
-      {/* Optional dark overlay */}
+      <video
+        className="hero-bg-video hero-bg-mobile"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      >
+        <source src={A + "hero-bg-mobile.mp4"} type="video/mp4" />
+      </video>
+
+      {/* Dark Overlay */}
       <div className="hero-video-overlay"></div>
 
       <div className="wrap hero-sample-wrap">
-
-        {/* Fully Transparent Content */}
         <motion.div
           className="hero-content-card"
           initial={{ opacity: 0, y: 35, scale: 0.97 }}
@@ -173,7 +183,6 @@ export function Hero() {
             ease: "easeOut",
           }}
         >
-
           {/* Heading */}
           <motion.h1
             className="hero-title"
@@ -218,13 +227,12 @@ export function Hero() {
               Explore Our World <span>→</span>
             </a>
           </motion.div>
-
         </motion.div>
-
       </div>
     </section>
   );
 }
+
 
 
 /* 02 ABOUT */
@@ -300,105 +308,215 @@ export function Services() {
         {/* ================================
             MAIN SERVICES
         ================================= */}
-        <div className="main-services">
+     
+<div className="main-services">
 
-          {/* Web Applications */}
-          <Reveal d={0}>
-            <motion.div
-              className="main-service-card"
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="main-service-number">01</div>
+  {/* XML Conversion Services */}
+  <Reveal d={0}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">01</div>
 
-              <motion.div
-                className="main-service-icon"
-                whileHover={{ scale: 1.08, rotate: 3 }}
-              >
-                <Icon n="globe" s={34} />
-              </motion.div>
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: 3 }}
+      >
+        <Icon n="file-code" s={34} />
+      </motion.div>
 
-              <h3>Web Applications</h3>
+      <h3>XML Conversion Services</h3>
 
-              <p>
-                Modern, responsive and scalable web applications designed
-                to deliver seamless experiences across all devices.
-              </p>
+      <p>
+        We provide accurate, structured, and high-quality XML
+        conversion services for books, journals, and scholarly
+        publications. Our solutions ensure content consistency,
+        industry-standard compliance, and seamless integration
+        across digital publishing platforms.
+      </p>
 
-              <div className="service-tags">
-                <span>React</span>
-                <span>Java</span>
-                <span>Spring Boot</span>
-                <span>Node.js</span>
-              </div>
-            </motion.div>
-          </Reveal>
+      <div className="service-tags">
+        <span>JATS XML</span>
+        <span>DocBook XML</span>
+        <span>BITS</span>
+        <span>DTD/XSD</span>
+        <span>XML Validation</span>
+      </div>
+    </motion.div>
+  </Reveal>
 
-          {/* Mobile Applications */}
-          <Reveal d={0.15}>
-            <motion.div
-              className="main-service-card"
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="main-service-number">02</div>
+  {/* EPUB Conversion & Digital Publishing */}
+  <Reveal d={0.15}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">02</div>
 
-              <motion.div
-                className="main-service-icon"
-                whileHover={{ scale: 1.08, rotate: -3 }}
-              >
-                <Icon n="smartphone" s={34} />
-              </motion.div>
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: -3 }}
+      >
+        <Icon n="book-open" s={34} />
+      </motion.div>
 
-              <h3>Mobile Applications</h3>
+      <h3>EPUB Conversion &amp; Digital Publishing</h3>
 
-              <p>
-                Intuitive mobile applications built for Android and iOS
-                with smooth performance and user-friendly experiences.
-              </p>
+      <p>
+        We transform print and digital content into high-quality,
+        device-compatible eBooks. Our EPUB solutions deliver
+        seamless reading experiences across smartphones, tablets,
+        laptops, and eReaders while maintaining content structure,
+        formatting, and visual consistency.
+      </p>
 
-              <div className="service-tags">
-                <span>React Native</span>
-                <span>Android</span>
-                <span>iOS</span>
-                <span>APIs</span>
-              </div>
-            </motion.div>
-          </Reveal>
+      <div className="service-tags">
+        <span>EPUB 2/3</span>
+        <span>HTML5</span>
+        <span>CSS3</span>
+        <span>Reflowable EPUB</span>
+        <span>Fixed Layout EPUB</span>
+      </div>
+    </motion.div>
+  </Reveal>
 
-          {/* Cloud Solutions */}
-          <Reveal d={0.3}>
-            <motion.div
-              className="main-service-card"
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="main-service-number">03</div>
+  {/* Accessible PDF Services */}
+  <Reveal d={0.3}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">03</div>
 
-              <motion.div
-                className="main-service-icon"
-                whileHover={{ scale: 1.08, rotate: 3 }}
-              >
-                <Icon n="cloud" s={34} />
-              </motion.div>
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: 3 }}
+      >
+        <Icon n="file-check" s={34} />
+      </motion.div>
 
-              <h3>Cloud Solutions</h3>
+      <h3>Accessible PDF (APDF) Services</h3>
 
-              <p>
-                Secure and scalable cloud solutions that help businesses
-                deploy, manage and grow their digital applications.
-              </p>
+      <p>
+        We make digital PDF documents more accessible, readable,
+        and user-friendly through professional PDF accessibility
+        remediation. Our services focus on proper document tagging,
+        logical reading order, and improved compatibility with
+        assistive technologies.
+      </p>
 
-              <div className="service-tags">
-                <span>Cloud</span>
-                <span>Deployment</span>
-                <span>Database</span>
-                <span>API</span>
-              </div>
-            </motion.div>
-          </Reveal>
+      <div className="service-tags">
+        <span>PDF Tagging</span>
+        <span>Reading Order</span>
+        <span>Alt Text</span>
+        <span>PDF/UA</span>
+        <span>Accessibility Validation</span>
+      </div>
+    </motion.div>
+  </Reveal>
 
-        </div>
+  {/* Web Applications - Existing Service */}
+  <Reveal d={0.45}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">04</div>
+
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: 3 }}
+      >
+        <Icon n="globe" s={34} />
+      </motion.div>
+
+      <h3>Web Applications</h3>
+
+      <p>
+        Modern, responsive and scalable web applications designed
+        to deliver seamless experiences across all devices.
+      </p>
+
+      <div className="service-tags">
+        <span>React</span>
+        <span>Java</span>
+        <span>Spring Boot</span>
+        <span>Node.js</span>
+      </div>
+    </motion.div>
+  </Reveal>
+
+  {/* Mobile Applications - Existing Service */}
+  <Reveal d={0.6}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">05</div>
+
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: -3 }}
+      >
+        <Icon n="smartphone" s={34} />
+      </motion.div>
+
+      <h3>Mobile Applications</h3>
+
+      <p>
+        Intuitive mobile applications built for Android and iOS
+        with smooth performance and user-friendly experiences.
+      </p>
+
+      <div className="service-tags">
+        <span>React Native</span>
+        <span>Android</span>
+        <span>iOS</span>
+        <span>APIs</span>
+      </div>
+    </motion.div>
+  </Reveal>
+
+  {/* Cloud Solutions - Existing Service */}
+  <Reveal d={0.75}>
+    <motion.div
+      className="main-service-card"
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className="main-service-number">06</div>
+
+      <motion.div
+        className="main-service-icon"
+        whileHover={{ scale: 1.08, rotate: 3 }}
+      >
+        <Icon n="cloud" s={34} />
+      </motion.div>
+
+      <h3>Cloud Solutions</h3>
+
+      <p>
+        Secure and scalable cloud solutions that help businesses
+        deploy, manage and grow their digital applications.
+      </p>
+
+      <div className="service-tags">
+        <span>Cloud</span>
+        <span>Deployment</span>
+        <span>Database</span>
+        <span>API</span>
+      </div>
+    </motion.div>
+  </Reveal>
+
+</div>
+
 
 
         {/* ================================
@@ -1300,39 +1418,32 @@ const PERKS = [
 ]
 
 const ROLES = [
+ 
   {
-    title: 'Frontend Engineer (React)',
-    dept: 'Engineering',
-    location: 'Tamil Nadu, India / Remote',
-    type: 'Full-time',
-    blurb:
-      'Build the reading experiences our clients ship to millions of readers — from our 3D book showcases to accessible, responsive publication layouts.',
-  },
-  {
-    title: 'Backend Engineer (Java / Spring Boot)',
-    dept: 'Engineering',
-    location: 'Tamil Nadu, India / Remote',
-    type: 'Full-time',
-    blurb:
-      'Design and scale the services behind our publishing and CRM platforms, from content pipelines to secure client dashboards.',
-  },
-  {
-    title: 'ePub & Digital Publishing Specialist',
-    dept: 'Production',
+    title: 'XML Conversion Associate',
+    dept: 'XML Production',
     location: 'Tamil Nadu, India',
     type: 'Full-time',
     blurb:
-      'Turn raw manuscripts into accessible, standards-compliant ePub and XML content for publishers around the world.',
+      'Work on book and journal publishing projects involving XML tagging, content structuring, validation, and publishing standards. Required skills include JATS XML, DocBook XML, BITS, DTD/XSD, Schematron, Oxygen XML Editor, reference tagging, cross-reference validation, and XML quality assurance.',
   },
   {
-    title: 'UI/UX Designer',
-    dept: 'Design',
-    location: 'Remote',
-    type: 'Contract',
+    title: 'EPUB Conversion Specialist',
+    dept: 'Digital Publishing',
+    location: 'Tamil Nadu, India',
+    type: 'Full-time',
     blurb:
-      'Shape the visual language of our client sites and internal tools — editorial, warm and unmistakably JAA TECH.',
+      'Create high-quality digital publications compatible with multiple devices. Required skills include EPUB 2 and EPUB 3, HTML5, CSS3, reflowable and fixed-layout EPUB, eBook formatting, styling, EPUB validation, quality checking, and cross-device compatibility testing.',
   },
-]
+  {
+    title: 'Accessible PDF (APDF) Specialist',
+    dept: 'PDF Accessibility',
+    location: 'Tamil Nadu, India',
+    type: 'Full-time',
+    blurb:
+      'Improve the accessibility and usability of digital documents through PDF tagging, document structuring, reading order correction, and accessibility validation. Required skills include Adobe Acrobat Pro, alternative text, table tagging, PDF/UA, and accessibility remediation.',
+  },
+];
 
 function RoleCard({ role, index, open, onToggle, onApply }) {
   return (
@@ -1477,8 +1588,9 @@ export function Contact() {
     }
 
     setError("");
-    openWhatsApp(
-      formatWhatsAppMessage("New Website Enquiry", [
+    openMail(
+      `Website Enquiry from ${form.name.trim()}`,
+      formatMailMessage("New Website Enquiry", [
         ["Name", form.name],
         ["Email", form.email],
         ["Phone", form.phone],
@@ -1554,13 +1666,13 @@ export function Contact() {
         <div className="contact-card">
           <div className="contact-card-header">
             <h3>Start a conversation</h3>
-            <p>Tell us a little about your project. It opens in WhatsApp, ready to send.</p>
+            <p>Tell us a little about your project. It opens in your email app, ready to send.</p>
           </div>
 
           <form onSubmit={handleSubmit} noValidate>
             {status === "sent" && (
               <div className="contact-alert contact-alert-success" role="status">
-                WhatsApp has opened with your message. Press Send there and we'll get back to you soon.
+                Your email app has opened with your message. Press Send there and we'll get back to you soon.
               </div>
             )}
 
@@ -1598,7 +1710,7 @@ export function Contact() {
             </div>
 
             <button type="submit" className="contact-submit">
-              <span><FaWhatsapp /> Send via WhatsApp</span>
+              <span><FaEnvelope /> Send via Email</span>
               <span className="contact-arrow">→</span>
             </button>
           </form>

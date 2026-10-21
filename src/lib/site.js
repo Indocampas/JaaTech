@@ -1,5 +1,5 @@
 /* Single source of truth for JAA TECH contact details.
-   Change the WhatsApp number here and every form on the site follows. */
+   Change the email here and every form/link on the site follows. */
 export const SITE = {
   name: 'JAA TECH PRIVATE LIMITED',
   phoneDisplay: '+91 90876 12310',
