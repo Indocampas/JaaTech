@@ -12,7 +12,7 @@ const src = (file) => encodeURI(DIR + file)
    w / h are the real pixel dimensions, used so each tile keeps its
    true aspect ratio (nothing is cropped) and the layout doesn't jump. */
 const MEDIA = [
-  { type: 'image', file: 'team discussion.jpg', title: 'Team Discussion', tag: 'Life at JAA', w: 1428, h: 1071 },
+  { type: 'image', file: 'team discussion.jpg', title: 'Young Minds. Bold Ideas. One Strong Team.', tag: 'Our Team', w: 1428, h: 1071 },
   { type: 'video', file: 'birthday celebration.mp4', poster: 'posters/birthday-celebration.jpg', title: 'Birthday Celebration', tag: 'Celebrations', w: 478, h: 850 },
   { type: 'image', file: 'celebration1.jpg', title: 'Festive Celebration', tag: 'Celebrations', w: 1428, h: 1071 },
   { type: 'image', file: 'work at jaa tech.jpg', title: 'Work at JAA TECH', tag: 'Life at JAA', w: 1071, h: 1428 },
@@ -22,7 +22,7 @@ const MEDIA = [
   { type: 'image', file: 'celebration3.jpg', title: 'Festive Day Together', tag: 'Celebrations', w: 1200, h: 1600 },
   { type: 'image', file: 'team outing 2.jpg', title: 'Game Day Outing', tag: 'Outings', w: 1600, h: 1200 },
   { type: 'video', file: '1st anniversary celebration.mp4', poster: 'posters/1st-anniversary-celebration.jpg', title: '1st Anniversary Celebration', tag: '1st Anniversary', w: 848, h: 478 },
-  { type: 'image', file: '1st anniversary cake.jpg', title: '1st Anniversary Cake', tag: '1st Anniversary', w: 900, h: 1600 },
+  //{ type: 'image', file: '1st anniversary cake.jpg', title: '1st Anniversary Cake', tag: '1st Anniversary', w: 900, h: 1600 },
   { type: 'image', file: 'team outing 3.jpg', title: 'Badminton Outing', tag: 'Outings', w: 1428, h: 1071 },
   { type: 'video', file: '1st anniversary.mp4', poster: 'posters/1st-anniversary.jpg', title: '1st Anniversary Moments', tag: '1st Anniversary', w: 848, h: 478 },
   { type: 'image', file: 'director joining.jpg', title: 'Work at JAA', tag: 'Life at JAA', w: 1200, h: 1600 },
@@ -198,13 +198,16 @@ function Lightbox({ items, index, setIndex, onClose }) {
           >
             {m.type === 'video' ? (
               <video
-                src={src(m.file)}
-                poster={src(m.poster)}
-                controls
-                autoPlay
-                playsInline
-                preload="metadata"
-              />
+  src={src(m.file)}
+  poster={src(m.poster)}
+  autoPlay
+  muted
+  playsInline
+  preload="metadata"
+  controls={false}
+  disablePictureInPicture
+  disableRemotePlayback
+/>
             ) : (
               <img src={src(m.file)} alt={`${m.title} — JAA TECH team`} />
             )}

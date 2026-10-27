@@ -6,6 +6,7 @@ export const SITE = {
   phoneTel: '+919087612310',
   whatsappNumber: '919087612310', // country code + number, digits only
   email: 'jaatechnology25@gmail.com',
+  businessEmail: 'Business@jaatech.in',
   addressLines: [
     'No: 3, 1st Floor, Tidel Neo,',
     'Tiruchitrambalam Village, Vanur Taluk,',

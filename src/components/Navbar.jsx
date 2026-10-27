@@ -21,12 +21,14 @@ export default function Navbar() {
     const handleScroll = () => {
       setOn(window.scrollY > 40);
 
-      const clear =
-        window.innerWidth <= 520
-          ? 90
-          : window.innerWidth <= 950
-            ? 105
-            : 190;
+      // Stay in sync with the CSS anchor offset (navbar height) plus a small buffer.
+      const offset =
+        parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue(
+            '--nav-offset'
+          )
+        ) || 92;
+      const clear = offset + 40;
 
       let current = 'Home';
 
@@ -99,26 +101,18 @@ export default function Navbar() {
     <header className={`nav ${on || open ? 'on' : ''}`}>
       {/* LOGO */}
       
+{/* LOGO */}
 <a
   href="#home"
   className="nav-logo"
   aria-label="JAA TECH home"
   onClick={() => handleNavClick('Home')}
 >
-
-<video
-  className="nav-logo-video"
-  src="/assets/jaa-tech-logo.mp4"
-  autoPlay
-  muted
-  loop
-  playsInline
-  disablePictureInPicture
-  controlsList="nodownload nofullscreen noremoteplayback"
-  preload="auto"
-  aria-label="JAA TECH logo animation"
-/>
-
+  <img
+    className="nav-logo-image"
+    src="/assets/jaa-tech-logo.png"
+    alt="JAA TECH Logo"
+  />
 </a>
 
 

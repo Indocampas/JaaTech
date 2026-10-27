@@ -224,7 +224,7 @@ export function Hero() {
             }}
           >
             <a href="#about" className="hero-btn hero-btn-primary">
-              Explore Our World <span>→</span>
+              Explore Our World →
             </a>
           </motion.div>
         </motion.div>
@@ -236,58 +236,111 @@ export function Hero() {
 
 
 /* 02 ABOUT */
+
+
 export function About() {
+  const features = [
+    {
+      icon: "📖",
+      title: "Creative Content Transformation",
+      text: "Turn ideas into engaging digital content.",
+    },
+    {
+      icon: "▱",
+      title: "Digital Publishing Expertise",
+      text: "End-to-end, standards-based publishing solutions.",
+    },
+    {
+      icon: "◈",
+      title: "Beautiful Reading Experiences",
+      text: "Accessible, responsive and reader-friendly outputs.",
+    },
+    {
+      icon: "</>",
+      title: "Technology-Driven Solutions",
+      text: "Scalable, secure and future-ready platforms.",
+    },
+  ];
+
   return (
-    <section id="about" className="s-blush">
-      <div className="wrap two about-grid">
-        
-        <div>
-          <Title
-            eyebrow="About"
-            title="Where Every Story Begins"
-            sub="Your content. Our creativity. A better tomorrow."
-          />
+    <section id="about" className="jaa-about">
+      <div className="jaa-about-curve jaa-curve-top" />
+      <div className="jaa-about-curve jaa-curve-bottom" />
 
-          <Reveal>
-            <p className="body">
-              Every great publication begins with an idea. We transform raw
-              content into meaningful, engaging and beautifully designed
-              digital experiences.
-            </p>
-          </Reveal>
+      <div className="wrap jaa-about-container">
+        <div className="jaa-about-grid">
 
-          <div className="feats">
-            {FEATS.map(([i, t], k) => (
-              <Reveal key={t} d={k * 0.08}>
-                <IconCard
-                  icon={i}
-                  title={t}
-                  text="Designed for modern digital reading."
-                />
-              </Reveal>
-            ))}
+          {/* LEFT CONTENT */}
+          <div className="jaa-about-content">
+            <Reveal>
+              <div className="jaa-about-eyebrow">
+                <span className="jaa-eyebrow-line" />
+                ABOUT US
+              </div>
+
+              <h2 className="jaa-about-heading">
+                Where <span>Every Story</span>
+                <br />
+                Begins
+              </h2>
+
+              <div className="jaa-about-tagline">
+                Your content. Our creativity.
+                A better tomorrow.
+              </div>
+
+              <p className="jaa-about-description">
+                Every great publication begins with an idea.
+                We transform raw content into meaningful,
+                engaging and beautifully designed digital
+                experiences.
+              </p>
+            </Reveal>
+
+            <div className="jaa-about-features">
+              {features.map((feature, index) => (
+                <Reveal key={feature.title} d={index * 0.08}>
+                  <div className="jaa-feature-card">
+                    <div className="jaa-feature-icon">
+                      {feature.icon}
+                    </div>
+
+                    <div className="jaa-feature-info">
+                      <h3>{feature.title}</h3>
+                      <p>{feature.text}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
+
+          {/* RIGHT VIDEO - AUTOPLAY AND LOOP */}
+          <Reveal className="jaa-about-media">
+            <div className="jaa-about-video-frame">
+              <video
+                src={A + "about-book.mp4"}
+                className="jaa-about-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                disablePictureInPicture
+                controlsList="nodownload nofullscreen noremoteplayback"
+                onContextMenu={(e) => e.preventDefault()}
+              />
+            </div>
+          </Reveal>
         </div>
 
-     <Reveal className="about-book">
-  <video
-    src={A + 'about-book.mp4'}
-    autoPlay
-    loop
-    muted
-    playsInline
-    preload="metadata"
-    disablePictureInPicture
-    controlsList="nodownload nofullscreen noremoteplayback"
-    onContextMenu={(e) => e.preventDefault()}
-    className="about-video"
-  />
-</Reveal>
-
+       
       </div>
     </section>
-  )
+  );
 }
+
+
 
 /* 03 SERVICES */
 
@@ -1596,7 +1649,8 @@ export function Contact() {
         ["Phone", form.phone],
         ["Company", form.company],
         ["Project Details", form.message],
-      ])
+      ]),
+      [SITE.email, SITE.businessEmail]
     );
     setStatus("sent");
     setForm({ name: "", email: "", phone: "", company: "", message: "" });
@@ -1624,6 +1678,8 @@ export function Contact() {
               <div>
                 <small>Email</small>
                 <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+                <br />
+                <a href={`mailto:${SITE.businessEmail}`}>{SITE.businessEmail}</a>
               </div>
             </div>
 
